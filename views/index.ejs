@@ -1,0 +1,117 @@
+<div class="max-w-6xl mx-auto space-y-32">
+    
+    <!-- Hero Section -->
+
+    <section class="min-h-[80vh] flex flex-col md:flex-row items-center justify-between gap-12 pt-20">
+        <!-- Text Content -->
+        <div class="flex-1 space-y-8">
+            <span class="text-lg font-light tracking-wide text-neutral-400">Hi there!</span>
+            
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1]">
+                I'm Stephen Wanjiru,<br>
+                a <span class="text-white">Fire Fighter</span> & <br>
+                <span class="text-white">Ai/ML Engineer</span>
+            </h1>
+
+            <p class="text-xl max-w-xl text-neutral-400 font-light leading-relaxed">
+                Bridging the gap between physical safety and digital intelligence.<br> 
+                Specializing in Hazmat Ops, AI/ML, and Data Analysis.
+            </p>
+
+            <div class="pt-4">
+                <a href="/about" class="inline-block border border-white rounded-full px-8 py-3 text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-colors">
+                    More About Me
+                </a>
+            </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="flex-1 flex justify-center md:justify-end relative w-full">
+            <div class="relative w-full max-w-[400px] aspect-[4/5]">
+                <!-- Image -->
+                <img src="/images/WhatsApp Image 2026-01-21 at 2.43.06 PM (4).jpeg" alt="King Stephen" class="w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 z-10 relative">
+                
+                <!-- Simple backdrop for contrast -->
+                <div class="absolute inset-0 bg-neutral-800 rounded-2xl -rotate-6 -z-10 bg-opacity-50"></div>
+            </div>
+            
+            <!-- Radial gradient effect -->
+            <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] aspect-square bg-white/5 rounded-full blur-[100px]"></div>
+        </div>
+    </section>
+
+    <!-- Scroll Indicator -->
+    <div class="flex justify-center py-12">
+        <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
+            <div class="w-1 h-2 bg-white rounded-full animate-bounce"></div> 
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="space-y-16 pt-24">
+        <div class="flex items-baseline justify-between border-b border-white/20 pb-4">
+            <h2 class="text-3xl font-bold tracking-widest uppercase">Expertise</h2>
+            <span class="text-sm font-mono text-neutral-500">01</span>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/20 border border-white/20">
+            <% const skills = ['Fire Fighter', 'Hazmat Ops', 'AI/ML Engineering', 'Data Analysis', 'Web Development', 'Node.js', 'Python', 'Emergency Response']; %>
+            <% skills.forEach((skill, index) => { %>
+                <div class="bg-[#111111] p-8 aspect-auto md:aspect-square flex flex-col justify-between hover:bg-neutral-900 transition-colors group min-h-[160px]">
+                    <span class="text-xs font-mono text-neutral-500 group-hover:text-white transition-colors"><%= (index + 1).toString().padStart(2, '0') %></span>
+                    <h3 class="text-xl font-bold tracking-tight text-neutral-300 group-hover:text-white transition-colors"><%= skill %></h3>
+                </div>
+            <% }) %>
+        </div>
+    </section>
+
+    <!-- Selected Work Section -->
+    <section id="work" class="space-y-16 pt-24">
+        <div class="flex items-baseline justify-between border-b border-white/20 pb-4">
+            <h2 class="text-3xl font-bold tracking-widest uppercase">Selected Work</h2>
+            <span class="text-sm font-mono text-neutral-500">02</span>
+        </div>
+
+        <!-- Masonry Grid for Gallery -->
+        <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            <% if (typeof images !== 'undefined' && images.length > 0) { %>
+                <% images.forEach((image, index) => { %>
+                    <div class="break-inside-avoid space-y-2 group cursor-pointer inline-block w-full">
+                        <div class="relative overflow-hidden rounded-sm bg-[#1a1a1a]">
+                            <img src="/images/<%= image %>" alt="Gallery Image <%= index + 1 %>" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform group-hover:scale-[1.02]">
+                            
+                            <!-- Overlay Info (Optional, keeping it minimal for Swiss style) -->
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        </div>
+                        <div class="flex justify-between items-baseline border-b border-white/10 pb-2 pt-2">
+                            <h3 class="text-sm font-bold text-neutral-300 group-hover:text-white transition-colors truncate pr-4">
+                                <%= image.split('.')[0] %> <!-- Simple filename as title -->
+                            </h3>
+                            <span class="text-[10px] font-mono text-neutral-600 group-hover:text-neutral-400 transition-colors">IMG 0<%= index + 1 %></span>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <!-- Fallback if no images found -->
+                <div class="col-span-full py-12 text-center text-neutral-500 font-mono text-sm">
+                    No images found in gallery.
+                </div>
+            <% } %>
+        </div>
+    </section>
+
+
+
+    <!-- Contact CTA -->
+    <section class="py-24 border-t border-black/10">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+            <h2 class="text-5xl md:text-7xl font-bold tracking-tighter max-w-xl leading-none">
+                Let's work <br> together.
+            </h2>
+            <a href="mailto:contact@example.com" class="text-xl font-semibold border-b-2 border-black pb-1 hover:text-neutral-600 hover:border-neutral-600">
+                Get in touch &rarr;
+            </a>
+        </div>
+    </section>
+
+</div>
