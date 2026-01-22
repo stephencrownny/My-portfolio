@@ -42,21 +42,23 @@ app.set("views", path.join(__dirname, "../views"));
 app.use(express.static(path.join(__dirname, "../public")));
 
 // Routes
-const resumeRoutes = require("./routes/resume");
 const contactRoutes = require("./routes/contact");
-app.use("/resume", resumeRoutes);
 app.use("/contact", contactRoutes);
 
 // Basic Home Route
 app.get("/", (req, res) => {
-  const fs = require('fs');
+  const fs = require("fs");
   const imagesDir = path.join(__dirname, "../public/images");
-  
+
   fs.readdir(imagesDir, (err, files) => {
     let images = [];
     if (!err) {
-      // Filter for image files only and exclude hidden files
-      images = files.filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file));
+      // Filter for images and exclude the personal profile image
+      // hero.jpg (fire truck) will be included in the gallery
+      images = files.filter((file) => 
+        /\.(jpg|jpeg|png|gif|webp)$/i.test(file) && 
+        file !== "profile.jpg"
+      );
     }
     res.render("index", { title: "Portfolio", images: images });
   });

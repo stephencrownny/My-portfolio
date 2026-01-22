@@ -29,7 +29,7 @@
         <div class="flex-1 flex justify-center md:justify-end relative w-full">
             <div class="relative w-full max-w-[400px] aspect-[4/5]">
                 <!-- Image -->
-                <img src="/images/WhatsApp Image 2026-01-21 at 2.43.06 PM (4).jpeg" alt="King Stephen" class="w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 z-10 relative">
+                <img src="/images/profile.jpg" alt="King Stephen" class="w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 z-10 relative">
                 
                 <!-- Simple backdrop for contrast -->
                 <div class="absolute inset-0 bg-neutral-800 rounded-2xl -rotate-6 -z-10 bg-opacity-50"></div>
@@ -54,12 +54,24 @@
             <span class="text-sm font-mono text-neutral-500">01</span>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-white/20 border border-white/20">
-            <% const skills = ['Fire Fighter', 'Hazmat Ops', 'AI/ML Engineering', 'Data Analysis', 'Web Development', 'Node.js', 'Python', 'Emergency Response']; %>
-            <% skills.forEach((skill, index) => { %>
-                <div class="bg-[#111111] p-8 aspect-auto md:aspect-square flex flex-col justify-between hover:bg-neutral-900 transition-colors group min-h-[160px]">
-                    <span class="text-xs font-mono text-neutral-500 group-hover:text-white transition-colors"><%= (index + 1).toString().padStart(2, '0') %></span>
-                    <h3 class="text-xl font-bold tracking-tight text-neutral-300 group-hover:text-white transition-colors"><%= skill %></h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-white/10 border border-white/10">
+            <% 
+            const expertise = [
+                { title: 'Fire Fighting & Hazmat', desc: 'Expertise in emergency response, hazardous materials operations, and public safety leadership.' },
+                { title: 'AI/ML Engineering', desc: 'Specializing in computer vision and predictive modeling to solve complex real-world challenges.' },
+                { title: 'Data Analysis', desc: 'Extracting actionable insights from complex datasets to drive data-informed decision making.' },
+                { title: 'Software Development', desc: 'Building scalable, secure, and modern web applications with Node.js and contemporary frameworks.' }
+            ]; 
+            %>
+            <% expertise.forEach((item, index) => { %>
+                <div class="bg-[#0a0a0a] p-10 flex flex-col justify-between hover:bg-neutral-900 transition-all duration-500 group min-h-[250px]">
+                    <div class="space-y-6">
+                        <span class="text-xs font-mono text-neutral-600 group-hover:text-white transition-colors"><%= (index + 1).toString().padStart(2, '0') %></span>
+                        <h3 class="text-2xl font-bold tracking-tight text-white"><%= item.title %></h3>
+                        <p class="text-neutral-400 font-light leading-relaxed group-hover:text-neutral-300 transition-colors max-w-sm">
+                            <%= item.desc %>
+                        </p>
+                    </div>
                 </div>
             <% }) %>
         </div>
@@ -72,27 +84,14 @@
             <span class="text-sm font-mono text-neutral-500">02</span>
         </div>
 
-        <!-- Masonry Grid for Gallery -->
-        <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <% if (typeof images !== 'undefined' && images.length > 0) { %>
                 <% images.forEach((image, index) => { %>
-                    <div class="break-inside-avoid space-y-2 group cursor-pointer inline-block w-full">
-                        <div class="relative overflow-hidden rounded-sm bg-[#1a1a1a]">
-                            <img src="/images/<%= image %>" alt="Gallery Image <%= index + 1 %>" class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out transform group-hover:scale-[1.02]">
-                            
-                            <!-- Overlay Info (Optional, keeping it minimal for Swiss style) -->
-                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        </div>
-                        <div class="flex justify-between items-baseline border-b border-white/10 pb-2 pt-2">
-                            <h3 class="text-sm font-bold text-neutral-300 group-hover:text-white transition-colors truncate pr-4">
-                                <%= image.split('.')[0] %> <!-- Simple filename as title -->
-                            </h3>
-                            <span class="text-[10px] font-mono text-neutral-600 group-hover:text-neutral-400 transition-colors">IMG 0<%= index + 1 %></span>
-                        </div>
+                    <div class="group cursor-pointer relative overflow-hidden aspect-[4/5] bg-[#111111] rounded-sm transition-transform duration-700 ease-out hover:scale-[0.98]">
+                        <img src="/images/<%= image %>" alt="<%= image %>" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-110">
                     </div>
                 <% }) %>
             <% } else { %>
-                <!-- Fallback if no images found -->
                 <div class="col-span-full py-12 text-center text-neutral-500 font-mono text-sm">
                     No images found in gallery.
                 </div>
@@ -100,15 +99,13 @@
         </div>
     </section>
 
-
-
     <!-- Contact CTA -->
-    <section class="py-24 border-t border-black/10">
+    <section class="py-24 border-t border-white/10">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
             <h2 class="text-5xl md:text-7xl font-bold tracking-tighter max-w-xl leading-none">
                 Let's work <br> together.
             </h2>
-            <a href="mailto:contact@example.com" class="text-xl font-semibold border-b-2 border-black pb-1 hover:text-neutral-600 hover:border-neutral-600">
+            <a href="mailto:stephen@kingstephen.dev" class="text-xl font-semibold border-b-2 border-white pb-1 hover:text-neutral-400 hover:border-neutral-400 transition-colors">
                 Get in touch &rarr;
             </a>
         </div>
