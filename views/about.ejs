@@ -24,9 +24,15 @@
         </div>
 
         <!-- Image -->
-        <div class="relative">
-             <div class="relative aspect-[3/4] md:aspect-[4/5] w-full">
-                <img src="/images/hero.jpg" alt="Fire Fighting" class="w-full h-full object-cover rounded-sm grayscale">
+        <div class="relative reveal-on-scroll">
+             <div class="relative aspect-[3/4] md:aspect-[4/5] w-full image-skeleton">
+                <img 
+                    src="/images/hero.jpg" 
+                    alt="Fire Fighting" 
+                    loading="lazy" 
+                    decoding="async"
+                    class="lazy-image w-full h-full object-cover rounded-sm grayscale"
+                >
                 <div class="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-50"></div>
             </div>
         </div>

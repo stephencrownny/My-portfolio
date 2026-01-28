@@ -16,7 +16,7 @@ app.use(
       directives: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", "'unsafe-inline'"], // Adjust based on needs
-        styleSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
         imgSrc: ["'self'", "data:", "https:"],
         connectSrc: ["'self'"],
         fontSrc: ["'self'", "https:", "data:"],
@@ -55,9 +55,9 @@ app.get("/", (req, res) => {
     if (!err) {
       // Filter for images and exclude the personal profile image
       // hero.jpg (fire truck) will be included in the gallery
-      images = files.filter((file) => 
-        /\.(jpg|jpeg|png|gif|webp)$/i.test(file) && 
-        file !== "profile.jpg"
+      images = files.filter(
+        (file) =>
+          /\.(jpg|jpeg|png|gif|webp)$/i.test(file) && file !== "profile.jpg",
       );
     }
     res.render("index", { title: "Portfolio", images: images });

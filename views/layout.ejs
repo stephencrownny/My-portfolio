@@ -6,12 +6,16 @@
     <meta name="description" content="Portfolio of King Stephen - Fire Fighter, AI/ML Engineer, and Data Analyst." />
     <title>King Stephen | Portfolio</title>
     <link href="/css/style.css" rel="stylesheet" />
+    <!-- Preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts with font-display: swap for no FOIT -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
+    
     <style>
       /* Custom Scrollbar for a premium feel */
       ::-webkit-scrollbar {
@@ -26,6 +30,42 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #555555;
       }
+      
+      /* Lazy Loading Animations */
+      .lazy-image {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      
+      .lazy-image.loaded {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Skeleton placeholder for loading images */
+      .image-skeleton {
+        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+        background-size: 200% 100%;
+        animation: skeleton-shimmer 1.5s infinite;
+      }
+      
+      @keyframes skeleton-shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      
+      /* Smooth image reveal */
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .reveal-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body class="bg-[#111111] text-white font-sans antialiased selection:bg-white selection:text-black flex flex-col min-h-screen">
@@ -36,5 +76,48 @@
     </main>
 
     <%- include('partials/footer') %>
+    
+    <!-- Performance: Intersection Observer for smooth image reveals -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Intersection Observer for scroll-triggered animations
+        const observerOptions = {
+          root: null,
+          rootMargin: '50px',
+          threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        
+        // Observe all elements with reveal-on-scroll class
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+          observer.observe(el);
+        });
+        
+        // Handle lazy image loading with fade-in effect and skeleton removal
+        document.querySelectorAll('.lazy-image').forEach(img => {
+          const handleImageLoad = function() {
+            this.classList.add('loaded');
+            // Remove skeleton from parent if present
+            if (this.parentElement && this.parentElement.classList.contains('image-skeleton')) {
+              this.parentElement.classList.remove('image-skeleton');
+            }
+          };
+          
+          if (img.complete) {
+            handleImageLoad.call(img);
+          } else {
+            img.addEventListener('load', handleImageLoad);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
