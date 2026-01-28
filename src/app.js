@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 const path = require("path");
 const dotenv = require("dotenv");
 
@@ -26,6 +27,18 @@ app.use(
     },
   }),
 );
+
+// Rate Limiting: Protect against brute force and DoS attacks
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again later.",
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+// Apply rate limiting to all requests
+app.use(limiter);
 
 // Body parser
 app.use(express.json());
