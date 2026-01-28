@@ -79,6 +79,13 @@
           animation: none;
         }
       }
+
+      /* Image Protection */
+      img {
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+      }
     </style>
   </head>
   <body class="bg-[#111111] text-white font-sans antialiased selection:bg-white selection:text-black flex flex-col min-h-screen">
@@ -129,6 +136,14 @@
           } else {
             img.addEventListener('load', handleImageLoad);
           }
+        });
+
+        // Image Protection: Disable right-click and dragging
+        document.querySelectorAll('img').forEach(img => {
+          // Disable right-click
+          img.addEventListener('contextmenu', (e) => e.preventDefault());
+          // Disable dragging
+          img.addEventListener('dragstart', (e) => e.preventDefault());
         });
       });
     </script>
