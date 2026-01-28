@@ -66,6 +66,19 @@
         opacity: 1;
         transform: translateY(0);
       }
+      /* Respect user's reduced motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        .lazy-image,
+        .reveal-on-scroll {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        
+        .image-skeleton {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body class="bg-[#111111] text-white font-sans antialiased selection:bg-white selection:text-black flex flex-col min-h-screen">
