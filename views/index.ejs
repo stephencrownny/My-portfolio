@@ -1,25 +1,24 @@
 <div class="max-w-6xl mx-auto space-y-32">
     
     <!-- Hero Section -->
-
     <section class="min-h-[80vh] flex flex-col md:flex-row items-center justify-between gap-12 pt-20">
         <!-- Text Content -->
         <div class="flex-1 space-y-8">
-            <span class="text-lg font-light tracking-wide text-neutral-400">Hi there!</span>
+            <span class="text-lg font-light tracking-wide" style="color: var(--color-text-muted);">Hi there!</span>
             
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1]">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1]" style="color: var(--color-text);">
                 I'm Stephen Wanjiru,<br>
-                a <span class="text-white">Fire Fighter</span> & <br>
-                <span class="text-white">Ai/ML Engineer</span>
+                a <span style="color: var(--color-accent);">Fire Fighter</span> & <br>
+                <span style="color: var(--color-accent);">Ai/ML Engineer</span>
             </h1>
 
-            <p class="text-xl max-w-xl text-neutral-400 font-light leading-relaxed">
+            <p class="text-xl max-w-xl font-light leading-relaxed" style="color: var(--color-text-secondary);">
                 Bridging the gap between physical safety and digital intelligence.<br> 
                 Specializing in Hazmat Ops, AI/ML, and Data Analysis.
             </p>
 
             <div class="pt-4">
-                <a href="/about" class="inline-block border border-white rounded-full px-8 py-3 text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-colors">
+                <a href="/about" class="inline-block rounded-full px-8 py-3 text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:scale-105" style="border: 2px solid var(--color-accent); color: var(--color-text);">
                     More About Me
                 </a>
             </div>
@@ -29,32 +28,32 @@
         <div class="flex-1 flex justify-center md:justify-end relative w-full">
             <div class="relative w-full max-w-[400px] aspect-[4/5]">
                 <!-- Image -->
-                <img src="/images/profile.jpg" alt="King Stephen" class="w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 z-10 relative">
+                <img src="/images/profile.jpg" alt="King Stephen" class="w-full h-full object-cover rounded-2xl transition-all duration-500 z-10 relative shadow-xl hover:scale-105">
                 
                 <!-- Simple backdrop for contrast -->
-                <div class="absolute inset-0 bg-neutral-800 rounded-2xl -rotate-6 -z-10 bg-opacity-50"></div>
+                <div class="absolute inset-0 rounded-2xl -rotate-6 -z-10" style="background-color: var(--color-backdrop);"></div>
             </div>
             
             <!-- Radial gradient effect -->
-            <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] aspect-square bg-white/5 rounded-full blur-[100px]"></div>
+            <div class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] aspect-square rounded-full blur-[100px]" style="background-color: var(--color-backdrop); opacity: 0.5;"></div>
         </div>
     </section>
 
     <!-- Scroll Indicator -->
     <div class="flex justify-center py-12">
-        <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
-            <div class="w-1 h-2 bg-white rounded-full animate-bounce"></div> 
+        <div class="w-6 h-10 rounded-full flex justify-center p-1" style="border: 2px solid var(--color-border);">
+            <div class="w-1 h-2 rounded-full animate-bounce" style="background-color: var(--color-accent);"></div> 
         </div>
     </div>
 
     <!-- Skills Section -->
     <section id="skills" class="space-y-16 pt-24">
-        <div class="flex items-baseline justify-between border-b border-white/20 pb-4">
-            <h2 class="text-3xl font-bold tracking-widest uppercase">Expertise</h2>
-            <span class="text-sm font-mono text-neutral-500">01</span>
+        <div class="flex items-baseline justify-between pb-4" style="border-bottom: 1px solid var(--color-border);">
+            <h2 class="text-3xl font-bold tracking-widest uppercase" style="color: var(--color-text);">Expertise</h2>
+            <span class="text-sm font-mono" style="color: var(--color-text-muted);">01</span>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-[1px] bg-white/10 border border-white/10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-[1px]" style="background-color: var(--color-border); border: 1px solid var(--color-border);">
             <% 
             const expertise = [
                 { title: 'Fire Fighting & Hazmat', desc: 'Expertise in emergency response, hazardous materials operations, and public safety leadership.' },
@@ -64,11 +63,11 @@
             ]; 
             %>
             <% expertise.forEach((item, index) => { %>
-                <div class="bg-[#0a0a0a] p-10 flex flex-col justify-between hover:bg-neutral-900 transition-all duration-500 group min-h-[250px]">
+                <div class="p-10 flex flex-col justify-between transition-all duration-500 group min-h-[250px] bg-theme-card hover:opacity-90" style="background-color: var(--color-bg-card);">
                     <div class="space-y-6">
-                        <span class="text-xs font-mono text-neutral-600 group-hover:text-white transition-colors"><%= (index + 1).toString().padStart(2, '0') %></span>
-                        <h3 class="text-2xl font-bold tracking-tight text-white"><%= item.title %></h3>
-                        <p class="text-neutral-400 font-light leading-relaxed group-hover:text-neutral-300 transition-colors max-w-sm">
+                        <span class="text-xs font-mono transition-colors" style="color: var(--color-text-muted);"><%= (index + 1).toString().padStart(2, '0') %></span>
+                        <h3 class="text-2xl font-bold tracking-tight" style="color: var(--color-text);"><%= item.title %></h3>
+                        <p class="font-light leading-relaxed transition-colors max-w-sm" style="color: var(--color-text-secondary);">
                             <%= item.desc %>
                         </p>
                     </div>
@@ -79,26 +78,26 @@
 
     <!-- Selected Work Section -->
     <section id="work" class="space-y-16 pt-24">
-        <div class="flex items-baseline justify-between border-b border-white/20 pb-4">
-            <h2 class="text-3xl font-bold tracking-widest uppercase">Selected Work</h2>
-            <span class="text-sm font-mono text-neutral-500">02</span>
+        <div class="flex items-baseline justify-between pb-4" style="border-bottom: 1px solid var(--color-border);">
+            <h2 class="text-3xl font-bold tracking-widest uppercase" style="color: var(--color-text);">Selected Work</h2>
+            <span class="text-sm font-mono" style="color: var(--color-text-muted);">02</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <% if (typeof images !== 'undefined' && images.length > 0) { %>
                 <% images.forEach((image, index) => { %>
-                    <div class="group cursor-pointer relative overflow-hidden aspect-[4/5] bg-[#111111] rounded-sm transition-transform duration-700 ease-out hover:scale-[0.98] reveal-on-scroll image-skeleton">
+                    <div class="group cursor-pointer relative overflow-hidden aspect-[4/5] rounded-sm transition-transform duration-700 ease-out hover:scale-[0.98] reveal-on-scroll image-skeleton shadow-lg" style="background-color: var(--color-bg-card);">
                         <img 
                             src="/images/<%= image %>" 
                             alt="<%= image %>" 
                             loading="lazy" 
                             decoding="async"
-                            class="lazy-image w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 ease-out transform group-hover:scale-110"
+                            class="lazy-image w-full h-full object-cover transition-all duration-1000 ease-out transform group-hover:scale-105"
                         >
                     </div>
                 <% }) %>
             <% } else { %>
-                <div class="col-span-full py-12 text-center text-neutral-500 font-mono text-sm">
+                <div class="col-span-full py-12 text-center font-mono text-sm" style="color: var(--color-text-muted);">
                     No images found in gallery.
                 </div>
             <% } %>
@@ -106,12 +105,12 @@
     </section>
 
     <!-- Contact CTA -->
-    <section class="py-24 border-t border-white/10">
+    <section class="py-24" style="border-top: 1px solid var(--color-border);">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-            <h2 class="text-5xl md:text-7xl font-bold tracking-tighter max-w-xl leading-none">
+            <h2 class="text-5xl md:text-7xl font-bold tracking-tighter max-w-xl leading-none" style="color: var(--color-text);">
                 Let's work <br> together.
             </h2>
-            <a href="mailto:stephen@kingstephen.dev" class="text-xl font-semibold border-b-2 border-white pb-1 hover:text-neutral-400 hover:border-neutral-400 transition-colors">
+            <a href="/contact" class="text-xl font-semibold pb-1 transition-opacity hover:opacity-60" style="color: var(--color-text); border-bottom: 2px solid var(--color-accent);">
                 Get in touch &rarr;
             </a>
         </div>
