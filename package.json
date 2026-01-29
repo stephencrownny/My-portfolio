@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"CSS is pre-built, skipping build step\"",
     "build:css": "npx tailwindcss -i ./src/input.css -o ./public/css/style.css --minify",
     "build:css:watch": "npx tailwindcss -i ./src/input.css -o ./public/css/style.css --watch",
     "start": "node src/app.js",
