@@ -3,6 +3,8 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
 const dotenv = require("dotenv");
+const fs = require("fs").promises;
+const logger = require("./utils/logger");
 
 // Load environment variables
 dotenv.config();
@@ -59,22 +61,22 @@ const contactRoutes = require("./routes/contact");
 app.use("/contact", contactRoutes);
 
 // Basic Home Route
-app.get("/", (req, res) => {
-  const fs = require("fs");
-  const imagesDir = path.join(__dirname, "../public/images");
+app.get("/", async (req, res, next) => {
+  try {
+    const imagesDir = path.join(__dirname, "../public/images");
+    const files = await fs.readdir(imagesDir);
 
-  fs.readdir(imagesDir, (err, files) => {
-    let images = [];
-    if (!err) {
-      // Filter for images and exclude the personal profile image
-      // hero.jpg (fire truck) will be included in the gallery
-      images = files.filter(
-        (file) =>
-          /\.(jpg|jpeg|png|gif|webp)$/i.test(file) && file !== "profile.jpg",
-      );
-    }
-    res.render("index", { title: "Portfolio", images: images });
-  });
+    // Filter for images and exclude the personal profile image
+    // hero.jpg (fire truck) will be included in the gallery
+    const images = files.filter(
+      (file) =>
+        /\.(jpg|jpeg|png|gif|webp)$/i.test(file) && file !== "profile.jpg",
+    );
+
+    res.render("index", { title: "Portfolio", images });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // About Route
@@ -89,11 +91,16 @@ app.use((req, res, next) => {
 
 // Error Handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  logger.error("Server error occurred", {
+    error: err.message,
+    stack: err.stack,
+    url: req.url,
+    method: req.method,
+  });
   res.status(500).send("Something broke!");
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  logger.info(`Server running on port ${PORT}`);
 });
