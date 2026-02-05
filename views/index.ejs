@@ -55,34 +55,6 @@
 
         <!-- iOS-Style Glassmorphism Bento Grid Layout -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-7">
-            <%
-            const expertise = [
-                {
-                    title: 'Fire Fighting & Hazmat',
-                    desc: 'Expertise in emergency response, hazardous materials operations, and public safety leadership.',
-                    span: 'md:col-span-7',
-                    height: 'min-h-[340px]'
-                },
-                {
-                    title: 'AI/ML Engineering',
-                    desc: 'Specializing in computer vision and predictive modeling to solve complex real-world challenges.',
-                    span: 'md:col-span-5',
-                    height: 'min-h-[340px]'
-                },
-                {
-                    title: 'Data Analysis',
-                    desc: 'Extracting actionable insights from complex datasets to drive data-informed decision making.',
-                    span: 'md:col-span-5',
-                    height: 'min-h-[300px]'
-                },
-                {
-                    title: 'Software Development',
-                    desc: 'Building scalable, secure, and modern web applications with Node.js and contemporary frameworks.',
-                    span: 'md:col-span-7',
-                    height: 'min-h-[300px]'
-                }
-            ];
-            %>
             <% expertise.forEach((item, index) => { %>
                 <div class="<%= item.span %> <%= item.height %> group reveal-on-scroll">
                     <!-- iOS Glass Card with Multiple Layers -->

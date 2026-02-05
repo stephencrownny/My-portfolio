@@ -73,7 +73,12 @@ app.get("/", async (req, res, next) => {
         /\.(jpg|jpeg|png|gif|webp)$/i.test(file) && file !== "profile.jpg",
     );
 
-    res.render("index", { title: "Portfolio", images });
+    // Load expertise data
+    const expertiseDataPath = path.join(__dirname, "../data/expertise.json");
+    const expertiseData = await fs.readFile(expertiseDataPath, "utf-8");
+    const { expertise } = JSON.parse(expertiseData);
+
+    res.render("index", { title: "Portfolio", images, expertise });
   } catch (err) {
     next(err);
   }
