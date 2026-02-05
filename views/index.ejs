@@ -53,73 +53,89 @@
             <span class="text-sm font-mono" style="color: var(--color-text-muted);">01</span>
         </div>
 
-        <!-- Staggered Bento Grid Layout -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+        <!-- Glassmorphism Bento Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-7">
             <%
             const expertise = [
                 {
                     title: 'Fire Fighting & Hazmat',
                     desc: 'Expertise in emergency response, hazardous materials operations, and public safety leadership.',
-                    icon: '🚒',
                     span: 'md:col-span-7',
-                    height: 'min-h-[320px]'
+                    height: 'min-h-[340px]'
                 },
                 {
                     title: 'AI/ML Engineering',
                     desc: 'Specializing in computer vision and predictive modeling to solve complex real-world challenges.',
-                    icon: '🤖',
                     span: 'md:col-span-5',
-                    height: 'min-h-[320px]'
+                    height: 'min-h-[340px]'
                 },
                 {
                     title: 'Data Analysis',
                     desc: 'Extracting actionable insights from complex datasets to drive data-informed decision making.',
-                    icon: '📊',
                     span: 'md:col-span-5',
-                    height: 'min-h-[280px]'
+                    height: 'min-h-[300px]'
                 },
                 {
                     title: 'Software Development',
                     desc: 'Building scalable, secure, and modern web applications with Node.js and contemporary frameworks.',
-                    icon: '💻',
                     span: 'md:col-span-7',
-                    height: 'min-h-[280px]'
+                    height: 'min-h-[300px]'
                 }
             ];
             %>
             <% expertise.forEach((item, index) => { %>
                 <div class="<%= item.span %> <%= item.height %> group reveal-on-scroll">
-                    <div class="relative h-full p-8 md:p-10 flex flex-col justify-between transition-all duration-700 ease-out overflow-hidden rounded-lg"
-                         style="background-color: var(--color-bg-card); border: 1px solid var(--color-border);">
+                    <div class="relative h-full p-10 md:p-12 flex flex-col justify-between transition-all duration-700 ease-out overflow-hidden rounded-3xl backdrop-blur-sm"
+                         style="background: linear-gradient(135deg,
+                                rgba(255, 255, 255, 0.05) 0%,
+                                rgba(255, 255, 255, 0.02) 100%);
+                                border: 1.5px solid rgba(255, 255, 255, 0.1);
+                                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);">
 
-                        <!-- Animated accent line on hover -->
-                        <div class="absolute top-0 left-0 w-full h-0.5 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"
-                             style="background-color: var(--color-accent);"></div>
+                        <!-- Gradient Border Effect on Hover -->
+                        <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                             style="background: linear-gradient(135deg,
+                                    var(--color-accent) 0%,
+                                    transparent 50%,
+                                    var(--color-accent) 100%);
+                                    padding: 1.5px;
+                                    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                                                  linear-gradient(#fff 0 0);
+                                    -webkit-mask-composite: xor;
+                                    mask-composite: exclude;">
+                        </div>
 
-                        <!-- Card Number & Icon -->
-                        <div class="flex items-start justify-between mb-6">
-                            <span class="text-xs font-mono tracking-widest transition-colors"
-                                  style="color: var(--color-text-muted);"><%= (index + 1).toString().padStart(2, '0') %></span>
-                            <div class="text-4xl md:text-5xl transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
-                                <%= item.icon %>
+                        <!-- Top Accent Bar -->
+                        <div class="absolute top-0 left-0 right-0 h-1 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"
+                             style="background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);"></div>
+
+                        <!-- Card Number -->
+                        <div class="mb-8">
+                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-500 group-hover:scale-110"
+                                 style="background: linear-gradient(135deg,
+                                        rgba(255, 255, 255, 0.1) 0%,
+                                        rgba(255, 255, 255, 0.05) 100%);
+                                        border: 1px solid rgba(255, 255, 255, 0.1);">
+                                <span class="text-sm font-mono font-bold tracking-wider"
+                                      style="color: var(--color-accent);"><%= (index + 1).toString().padStart(2, '0') %></span>
                             </div>
                         </div>
 
                         <!-- Content -->
-                        <div class="space-y-4 flex-1">
-                            <h3 class="text-2xl md:text-3xl font-bold tracking-tight leading-tight transition-all duration-500"
+                        <div class="space-y-5 flex-1">
+                            <h3 class="text-2xl md:text-3xl font-bold tracking-tight leading-tight transition-all duration-500 group-hover:translate-x-1"
                                 style="color: var(--color-text);">
                                 <%= item.title %>
                             </h3>
-                            <p class="font-light leading-relaxed text-base md:text-lg transition-all duration-500 max-w-md"
+                            <p class="font-light leading-relaxed text-base md:text-lg transition-all duration-500 max-w-lg"
                                style="color: var(--color-text-secondary);">
                                 <%= item.desc %>
                             </p>
                         </div>
 
-                        <!-- Hover Background Effect -->
-                        <div class="absolute inset-0 -z-10 opacity-0 group-hover:opacity-5 transition-opacity duration-700"
-                             style="background: radial-gradient(circle at top right, var(--color-accent), transparent 70%);"></div>
+                        <!-- Subtle Gradient Glow on Hover -->
+                        <div class="absolute -bottom-20 -right-20 w-64 h-64 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-1000 blur-3xl pointer-events-none"
+                             style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
                     </div>
                 </div>
             <% }) %>
