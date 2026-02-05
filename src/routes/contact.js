@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
+const { sendContactEmail } = require('../utils/email');
+const logger = require('../utils/logger');
 
 // Render Contact Page
 router.get('/', (req, res) => {
@@ -27,16 +29,44 @@ router.post('/', [
     .trim()
     .isLength({ min: 10 }).withMessage('Message must be at least 10 characters long')
     .escape(),
-], (req, res) => {
+], async (req, res) => {
   // Check for validation errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  // If validation passes, process the data (e.g., send email)
-  // For now, just return success
-  res.json({ message: 'Contact form submitted successfully', data: req.body });
+  // Send email with form data
+  try {
+    const { name, email, message } = req.body;
+
+    await sendContactEmail({ name, email, message });
+
+    logger.info('Contact form submitted', { name, email });
+
+    res.json({
+      success: true,
+      message: 'Your message has been sent successfully! I will get back to you soon.',
+    });
+  } catch (error) {
+    logger.error('Contact form submission failed', {
+      error: error.message,
+      email: req.body.email,
+    });
+
+    // Check if it's a configuration error
+    if (error.message === 'Email service not configured') {
+      return res.status(503).json({
+        success: false,
+        message: 'Email service is temporarily unavailable. Please try again later or contact via social media.',
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send message. Please try again later.',
+    });
+  }
 });
 
 module.exports = router;
