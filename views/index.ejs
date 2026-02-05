@@ -53,7 +53,7 @@
             <span class="text-sm font-mono" style="color: var(--color-text-muted);">01</span>
         </div>
 
-        <!-- Glassmorphism Bento Grid Layout -->
+        <!-- iOS-Style Glassmorphism Bento Grid Layout -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-7">
             <%
             const expertise = [
@@ -85,57 +85,85 @@
             %>
             <% expertise.forEach((item, index) => { %>
                 <div class="<%= item.span %> <%= item.height %> group reveal-on-scroll">
-                    <div class="relative h-full p-10 md:p-12 flex flex-col justify-between transition-all duration-700 ease-out overflow-hidden rounded-3xl backdrop-blur-sm"
-                         style="background: linear-gradient(135deg,
-                                rgba(255, 255, 255, 0.05) 0%,
-                                rgba(255, 255, 255, 0.02) 100%);
-                                border: 1.5px solid rgba(255, 255, 255, 0.1);
-                                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);">
+                    <!-- iOS Glass Card with Multiple Layers -->
+                    <div class="relative h-full rounded-[32px] overflow-hidden transition-all duration-700 ease-out group-hover:scale-[1.02]"
+                         style="box-shadow:
+                                0 1px 2px rgba(0, 0, 0, 0.1),
+                                0 4px 8px rgba(0, 0, 0, 0.08),
+                                0 8px 16px rgba(0, 0, 0, 0.06),
+                                0 16px 32px rgba(0, 0, 0, 0.04),
+                                inset 0 1px 0 rgba(255, 255, 255, 0.15);">
 
-                        <!-- Gradient Border Effect on Hover -->
-                        <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                        <!-- Base Layer: Frosted Glass Background -->
+                        <div class="absolute inset-0"
                              style="background: linear-gradient(135deg,
-                                    var(--color-accent) 0%,
-                                    transparent 50%,
-                                    var(--color-accent) 100%);
-                                    padding: 1.5px;
-                                    -webkit-mask: linear-gradient(#fff 0 0) content-box,
-                                                  linear-gradient(#fff 0 0);
-                                    -webkit-mask-composite: xor;
-                                    mask-composite: exclude;">
+                                    rgba(255, 255, 255, 0.12) 0%,
+                                    rgba(255, 255, 255, 0.06) 100%);
+                                    backdrop-filter: blur(40px) saturate(180%);
+                                    -webkit-backdrop-filter: blur(40px) saturate(180%);">
                         </div>
 
-                        <!-- Top Accent Bar -->
-                        <div class="absolute top-0 left-0 right-0 h-1 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"
-                             style="background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);"></div>
+                        <!-- Border Layer: Subtle White Edge -->
+                        <div class="absolute inset-0 rounded-[32px] pointer-events-none"
+                             style="border: 0.5px solid rgba(255, 255, 255, 0.18);
+                                    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);">
+                        </div>
 
-                        <!-- Card Number -->
-                        <div class="mb-8">
-                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl transition-all duration-500 group-hover:scale-110"
-                                 style="background: linear-gradient(135deg,
-                                        rgba(255, 255, 255, 0.1) 0%,
-                                        rgba(255, 255, 255, 0.05) 100%);
-                                        border: 1px solid rgba(255, 255, 255, 0.1);">
-                                <span class="text-sm font-mono font-bold tracking-wider"
-                                      style="color: var(--color-accent);"><%= (index + 1).toString().padStart(2, '0') %></span>
+                        <!-- Gradient Overlay on Hover -->
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                             style="background: linear-gradient(135deg,
+                                    rgba(255, 255, 255, 0.08) 0%,
+                                    rgba(255, 255, 255, 0.02) 50%,
+                                    rgba(255, 255, 255, 0.08) 100%);">
+                        </div>
+
+                        <!-- Accent Glow on Hover -->
+                        <div class="absolute -top-20 -right-20 w-80 h-80 opacity-0 group-hover:opacity-20 transition-all duration-1000 blur-3xl"
+                             style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);">
+                        </div>
+
+                        <!-- Top Shine Line (iPhone signature effect) -->
+                        <div class="absolute top-0 left-0 right-0 h-px opacity-60"
+                             style="background: linear-gradient(90deg,
+                                    transparent 0%,
+                                    rgba(255, 255, 255, 0.5) 50%,
+                                    transparent 100%);">
+                        </div>
+
+                        <!-- Content Container -->
+                        <div class="relative h-full p-10 md:p-12 flex flex-col justify-between">
+                            <!-- Card Number Badge -->
+                            <div class="mb-8">
+                                <div class="inline-flex items-center justify-center w-14 h-14 rounded-[18px] transition-all duration-500 group-hover:scale-105 group-hover:rotate-3"
+                                     style="background: linear-gradient(135deg,
+                                            rgba(255, 255, 255, 0.15) 0%,
+                                            rgba(255, 255, 255, 0.08) 100%);
+                                            border: 0.5px solid rgba(255, 255, 255, 0.2);
+                                            box-shadow:
+                                                0 2px 8px rgba(0, 0, 0, 0.1),
+                                                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                                                inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+                                            backdrop-filter: blur(20px);
+                                            -webkit-backdrop-filter: blur(20px);">
+                                    <span class="text-base font-mono font-bold tracking-wider"
+                                          style="color: var(--color-accent);
+                                                 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);"><%= (index + 1).toString().padStart(2, '0') %></span>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="space-y-5 flex-1">
+                                <h3 class="text-2xl md:text-3xl font-bold tracking-tight leading-tight transition-all duration-500"
+                                    style="color: var(--color-text);
+                                           text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);">
+                                    <%= item.title %>
+                                </h3>
+                                <p class="font-light leading-relaxed text-base md:text-lg transition-all duration-500 max-w-lg"
+                                   style="color: var(--color-text-secondary);">
+                                    <%= item.desc %>
+                                </p>
                             </div>
                         </div>
-
-                        <!-- Content -->
-                        <div class="space-y-5 flex-1">
-                            <h3 class="text-2xl md:text-3xl font-bold tracking-tight leading-tight transition-all duration-500 group-hover:translate-x-1"
-                                style="color: var(--color-text);">
-                                <%= item.title %>
-                            </h3>
-                            <p class="font-light leading-relaxed text-base md:text-lg transition-all duration-500 max-w-lg"
-                               style="color: var(--color-text-secondary);">
-                                <%= item.desc %>
-                            </p>
-                        </div>
-
-                        <!-- Subtle Gradient Glow on Hover -->
-                        <div class="absolute -bottom-20 -right-20 w-64 h-64 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-1000 blur-3xl pointer-events-none"
-                             style="background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);"></div>
                     </div>
                 </div>
             <% }) %>
