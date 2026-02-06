@@ -9,6 +9,80 @@
 
     <!-- Contact Details -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="space-y-6">
+            <h3 class="text-sm font-mono uppercase tracking-widest" style="color: var(--color-text-muted);">Send a Message</h3>
+            <form id="contactForm" class="space-y-6" novalidate>
+                <div>
+                    <label class="form-label" for="name">Name</label>
+                    <input type="text" id="name" name="name" required class="form-control" placeholder="Your name">
+                </div>
+
+                <div>
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" required class="form-control" placeholder="your.email@example.com">
+                </div>
+
+                <div>
+                    <label class="form-label" for="message">Message</label>
+                    <textarea id="message" name="message" required rows="6" class="form-control" placeholder="Tell me about your project..."></textarea>
+                </div>
+
+                <div id="formMessage" class="hidden p-4 text-sm rounded"></div>
+
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+
+            <script>
+                document.getElementById('contactForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = e.target.querySelector('button');
+                    const msg = document.getElementById('formMessage');
+
+                    btn.disabled = true;
+                    btn.textContent = 'Sending...';
+
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    };
+
+                    try {
+                        const response = await fetch('/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+
+                        const data = await response.json();
+
+                        if (data.success) {
+                            msg.textContent = data.message;
+                            msg.style.background = 'var(--color-text)';
+                            msg.style.color = 'var(--color-bg)';
+                            msg.classList.remove('hidden');
+                            e.target.reset();
+                        } else {
+                            msg.textContent = data.message || 'An error occurred';
+                            msg.style.background = '#dc2626';
+                            msg.style.color = '#ffffff';
+                            msg.classList.remove('hidden');
+                        }
+                    } catch (error) {
+                        msg.textContent = 'Network error. Please try again.';
+                        msg.style.background = '#dc2626';
+                        msg.style.color = '#ffffff';
+                        msg.classList.remove('hidden');
+                    } finally {
+                        btn.disabled = false;
+                        btn.textContent = 'Send Message';
+                    }
+                });
+            </script>
+        </div>
+
+        <!-- Socials -->
         <div class="space-y-2">
             <h3 class="text-sm font-mono uppercase tracking-widest" style="color: var(--color-text-muted);">Socials</h3>
             <div class="flex flex-col items-start space-y-2">

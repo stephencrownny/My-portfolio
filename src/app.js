@@ -3,7 +3,6 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const path = require("path");
 const dotenv = require("dotenv");
-const fs = require("fs").promises;
 const logger = require("./utils/logger");
 
 // Load environment variables
@@ -53,41 +52,30 @@ app.set("layout", "./layout");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
-// Serve static files from public directory
-app.use(express.static(path.join(__dirname, "../public")));
+// Serve static files from public directory with caching
+app.use(express.static(path.join(__dirname, "../public"), {
+  maxAge: '1d',
+  etag: false,
+  lastModified: true,
+  setHeaders: (res, filePath) => {
+    if (/\.(jpg|jpeg|png|webp|gif)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=604800'); // 7 days for images
+    } else if (/\.(css|js)$/i.test(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day for CSS/JS
+    }
+  }
+}));
 
 // Routes
+const indexRoutes = require('./routes/index');
+const aboutRoutes = require('./routes/about');
 const contactRoutes = require("./routes/contact");
-app.use("/contact", contactRoutes);
+const servicesRoutes = require('./routes/services');
 
-// Basic Home Route
-app.get("/", async (req, res, next) => {
-  try {
-    const imagesDir = path.join(__dirname, "../public/images");
-    const files = await fs.readdir(imagesDir);
-
-    // Filter for images and exclude the personal profile image
-    // hero.jpg (fire truck) will be included in the gallery
-    const images = files.filter(
-      (file) =>
-        /\.(jpg|jpeg|png|gif|webp)$/i.test(file) && file !== "profile.jpg",
-    );
-
-    // Load expertise data
-    const expertiseDataPath = path.join(__dirname, "../data/expertise.json");
-    const expertiseData = await fs.readFile(expertiseDataPath, "utf-8");
-    const { expertise } = JSON.parse(expertiseData);
-
-    res.render("index", { title: "Portfolio", images, expertise });
-  } catch (err) {
-    next(err);
-  }
-});
-
-// About Route
-app.get("/about", (req, res) => {
-  res.render("about", { title: "About Me" });
-});
+app.use('/', indexRoutes);
+app.use('/about', aboutRoutes);
+app.use('/contact', contactRoutes);
+app.use('/services', servicesRoutes);
 
 // 404 Handler
 app.use((req, res, next) => {
@@ -102,7 +90,11 @@ app.use((err, req, res, next) => {
     url: req.url,
     method: req.method,
   });
-  res.status(500).send("Something broke!");
+  const errorMessage = process.env.NODE_ENV === 'production'
+    ? 'Something went wrong. Please try again later.'
+    : err.message;
+
+  res.status(500).send(errorMessage);
 });
 
 const PORT = process.env.PORT || 3000;

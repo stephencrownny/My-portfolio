@@ -1,0 +1,78 @@
+<div class="space-y-24 max-w-6xl mx-auto">
+    <!-- Header -->
+    <section class="space-y-4 pt-12">
+        <span class="text-sm font-mono uppercase tracking-widest" style="color: var(--color-text-muted);">03 / Services</span>
+        <h1 class="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9]" style="color: var(--color-text);">
+            What I Can <br> Do for You.
+        </h1>
+        <p class="text-xl max-w-2xl font-light leading-relaxed pt-6" style="color: var(--color-text-secondary);">
+            Leveraging expertise across emergency response, machine learning, and software development to deliver impactful solutions.
+        </p>
+    </section>
+
+    <!-- Services Grid (using new card-hero class) -->
+    <section class="space-y-16 pt-12">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-7">
+            <% services.forEach((service, index) => { %>
+                <div class="<%= service.span %> <%= service.height %> group reveal-on-scroll">
+                    <div class="card-hero relative">
+                        <!-- Number Badge -->
+                        <div class="mb-8">
+                            <div class="inline-flex items-center justify-center w-14 h-14 rounded-[18px] glass-md transition-all duration-700 group-hover:scale-105 group-hover:rotate-3">
+                                <span class="text-base font-mono font-bold tracking-wider" style="color: var(--color-accent);">
+                                    <%= (index + 1).toString().padStart(2, '0') %>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="space-y-6 flex-1">
+                            <div class="text-xs font-mono uppercase tracking-widest" style="color: var(--color-text-muted);">
+                                <%= service.category %>
+                            </div>
+
+                            <h3 class="text-2xl md:text-3xl font-bold tracking-tight leading-tight" style="color: var(--color-text);">
+                                <%= service.title %>
+                            </h3>
+
+                            <p class="font-light text-base" style="color: var(--color-text-secondary);">
+                                <%= service.description %>
+                            </p>
+
+                            <!-- Features -->
+                            <ul class="space-y-2 text-sm" style="color: var(--color-text-secondary);">
+                                <% service.features.slice(0, 3).forEach(feature => { %>
+                                    <li class="flex items-start gap-2">
+                                        <span style="color: var(--color-accent);">✓</span>
+                                        <span><%= feature %></span>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </div>
+
+                        <!-- CTA -->
+                        <div class="mt-6">
+                            <a href="/contact" class="inline-flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-60" style="color: var(--color-accent);">
+                                Get started <span>&rarr;</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24" style="border-top: 1px solid var(--color-border);">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+            <div>
+                <h2 class="text-5xl md:text-7xl font-bold tracking-tighter max-w-xl leading-none" style="color: var(--color-text);">
+                    Ready to start <br> your project?
+                </h2>
+            </div>
+            <a href="/contact" class="btn-secondary">
+                Contact me &rarr;
+            </a>
+        </div>
+    </section>
+</div>

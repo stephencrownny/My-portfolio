@@ -1,0 +1,60 @@
+{
+  "services": [
+    {
+      "id": "hazmat-consulting",
+      "title": "Hazmat Operations Consulting",
+      "description": "Comprehensive consulting services for hazardous materials operations, incident response planning, and safety protocol development.",
+      "category": "Safety & Emergency Response",
+      "features": [
+        "Incident response planning",
+        "Safety protocol development",
+        "Team training and certification",
+        "Compliance auditing"
+      ],
+      "span": "md:col-span-7",
+      "height": "min-h-[400px]"
+    },
+    {
+      "id": "ml-engineering",
+      "title": "AI/ML Solutions Development",
+      "description": "End-to-end machine learning solutions specializing in computer vision and predictive analytics.",
+      "category": "AI & Machine Learning",
+      "features": [
+        "Computer vision systems",
+        "Predictive modeling",
+        "Model training & optimization",
+        "MLOps implementation"
+      ],
+      "span": "md:col-span-5",
+      "height": "min-h-[400px]"
+    },
+    {
+      "id": "data-analysis",
+      "title": "Data Analysis & Insights",
+      "description": "Professional data analysis services to extract meaningful insights and drive data-informed decision making.",
+      "category": "Data Science",
+      "features": [
+        "Exploratory data analysis",
+        "Statistical modeling",
+        "Data visualization",
+        "Reporting & dashboards"
+      ],
+      "span": "md:col-span-5",
+      "height": "min-h-[360px]"
+    },
+    {
+      "id": "web-development",
+      "title": "Full-Stack Web Development",
+      "description": "Custom web application development using modern frameworks and best practices for security and performance.",
+      "category": "Software Development",
+      "features": [
+        "Node.js & Express backends",
+        "React/Vue frontends",
+        "RESTful APIs",
+        "Database design"
+      ],
+      "span": "md:col-span-7",
+      "height": "min-h-[360px]"
+    }
+  ]
+}
