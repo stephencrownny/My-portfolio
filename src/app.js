@@ -52,6 +52,10 @@ app.set("layout", "./layout");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "../views"));
 
+// Body parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Serve static files from public directory with caching
 app.use(express.static(path.join(__dirname, "../public"), {
   maxAge: '1d',
