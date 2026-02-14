@@ -127,6 +127,15 @@
       .border-theme { border-color: var(--color-border); }
       .border-theme-light { border-color: var(--color-border-light); }
       .bg-theme-backdrop { background-color: var(--color-backdrop); }
+
+      /* Nav link hover glow */
+      .nav-link {
+        transition: text-shadow 0.3s ease, opacity 0.15s ease;
+      }
+      .nav-link:hover {
+        opacity: 1;
+        text-shadow: 0 0 8px var(--color-nav-glow), 0 0 20px var(--color-nav-glow);
+      }
     </style>
 
     <!-- JSON-LD Structured Data -->

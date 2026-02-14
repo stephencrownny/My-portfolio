@@ -21,6 +21,7 @@
   --color-backdrop: #e5e7eb;
   --color-selection-bg: #1f2937;
   --color-selection-text: #ffffff;
+  --color-nav-glow: rgba(0, 0, 0, 0.6);
 }
 
 /* Dark mode - auto-detected from system preference */
@@ -44,6 +45,7 @@
     --color-backdrop: #262626;
     --color-selection-bg: #ffffff;
     --color-selection-text: #000000;
+    --color-nav-glow: rgba(255, 255, 255, 0.7);
   }
 }
 
@@ -80,6 +82,16 @@
     @apply glass-base rounded-glass-lg;
     box-shadow: theme('boxShadow.glass-lg');
     border: 0.5px solid rgba(255, 255, 255, 0.18);
+  }
+
+  /* Nav Link Glow */
+  .nav-link {
+    transition: text-shadow 0.3s ease, opacity 0.15s ease;
+  }
+
+  .nav-link:hover {
+    opacity: 1;
+    text-shadow: 0 0 8px var(--color-nav-glow), 0 0 20px var(--color-nav-glow);
   }
 
   /* Button Components */
