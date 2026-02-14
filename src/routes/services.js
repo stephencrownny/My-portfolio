@@ -13,6 +13,15 @@ router.get('/', async (req, res, next) => {
 
     res.render('services', {
       title: 'Services',
+      pageTitle: 'Services | King Stephen - Hazmat, AI/ML & Data Analysis',
+      metaDescription: 'Professional services including Hazmat Operations consulting, AI/ML Engineering solutions, and Data Analysis. Expert services by Stephen Wanjiru.',
+      canonicalUrl: 'https://kingstephen.com/services',
+      ogTitle: 'Services | King Stephen - Hazmat, AI/ML & Data Analysis',
+      ogImage: 'https://kingstephen.com/images/profile.jpg',
+      breadcrumbs: [
+        { name: 'Home', url: 'https://kingstephen.com/' },
+        { name: 'Services', url: 'https://kingstephen.com/services' }
+      ],
       services
     });
   } catch (err) {

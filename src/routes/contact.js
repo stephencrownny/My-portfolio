@@ -6,7 +6,18 @@ const logger = require('../utils/logger');
 
 // Render Contact Page
 router.get('/', (req, res) => {
-  res.render('contact', { title: 'Contact' });
+  res.render('contact', {
+    title: 'Contact',
+    pageTitle: 'Contact King Stephen | Get in Touch',
+    metaDescription: 'Get in touch with Stephen Wanjiru for Fire Fighting, Hazmat Operations, AI/ML Engineering, or Data Analysis services. Available for consulting and collaboration.',
+    canonicalUrl: 'https://kingstephen.com/contact',
+    ogTitle: 'Contact King Stephen | Get in Touch',
+    ogImage: 'https://kingstephen.com/images/profile.jpg',
+    breadcrumbs: [
+      { name: 'Home', url: 'https://kingstephen.com/' },
+      { name: 'Contact', url: 'https://kingstephen.com/contact' }
+    ]
+  });
 });
 
 // Contact Form Submission with Validation

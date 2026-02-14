@@ -3,9 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio of King Stephen - Fire Fighter, AI/ML Engineer, and Data Analyst." />
+    <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Portfolio of King Stephen - Fire Fighter, AI/ML Engineer, and Data Analyst specializing in Hazmat Operations, Machine Learning, and Data Analysis.' %>" />
     <meta name="color-scheme" content="light dark" />
-    <title>King Stephen | Portfolio</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Stephen Wanjiru" />
+
+    <title><%= typeof pageTitle !== 'undefined' ? pageTitle : 'King Stephen | Fire Fighter & AI/ML Engineer' %></title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://kingstephen.com' %>" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="<%= typeof ogTitle !== 'undefined' ? ogTitle : (typeof pageTitle !== 'undefined' ? pageTitle : 'King Stephen | Fire Fighter & AI/ML Engineer') %>" />
+    <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Portfolio of King Stephen - Fire Fighter, AI/ML Engineer, and Data Analyst specializing in Hazmat Operations, Machine Learning, and Data Analysis.' %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= typeof canonicalUrl !== 'undefined' ? canonicalUrl : 'https://kingstephen.com' %>" />
+    <meta property="og:image" content="<%= typeof ogImage !== 'undefined' ? ogImage : 'https://kingstephen.com/images/profile.jpg' %>" />
+    <meta property="og:site_name" content="King Stephen Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%= typeof ogTitle !== 'undefined' ? ogTitle : (typeof pageTitle !== 'undefined' ? pageTitle : 'King Stephen | Fire Fighter & AI/ML Engineer') %>" />
+    <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Portfolio of King Stephen - Fire Fighter, AI/ML Engineer, and Data Analyst specializing in Hazmat Operations, Machine Learning, and Data Analysis.' %>" />
+    <meta name="twitter:image" content="<%= typeof ogImage !== 'undefined' ? ogImage : 'https://kingstephen.com/images/profile.jpg' %>" />
+    <meta name="twitter:creator" content="@ngigicrown" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
     <link href="/css/style.css" rel="stylesheet" />
     <!-- Preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -100,11 +128,58 @@
       .border-theme-light { border-color: var(--color-border-light); }
       .bg-theme-backdrop { background-color: var(--color-backdrop); }
     </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://kingstephen.com/#person",
+          "name": "Stephen Wanjiru",
+          "alternateName": "King Stephen",
+          "jobTitle": ["Fire Fighter", "AI/ML Engineer", "Data Analyst"],
+          "url": "https://kingstephen.com",
+          "image": "https://kingstephen.com/images/profile.jpg",
+          "sameAs": [
+            "https://www.linkedin.com/in/stephen-wanjiru-163b90149",
+            "https://x.com/ngigicrown"
+          ],
+          "knowsAbout": ["Hazmat Operations", "Artificial Intelligence", "Machine Learning", "Data Analysis", "Fire Fighting"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://kingstephen.com/#website",
+          "url": "https://kingstephen.com",
+          "name": "King Stephen Portfolio",
+          "description": "Portfolio of King Stephen - Fire Fighter, AI/ML Engineer, and Data Analyst",
+          "publisher": {
+            "@id": "https://kingstephen.com/#person"
+          }
+        }<% if (typeof breadcrumbs !== 'undefined' && breadcrumbs.length > 0) { %>,
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            <% breadcrumbs.forEach((crumb, index) => { %>
+            {
+              "@type": "ListItem",
+              "position": <%= index + 1 %>,
+              "name": "<%= crumb.name %>",
+              "item": "<%= crumb.url %>"
+            }<%= index < breadcrumbs.length - 1 ? ',' : '' %>
+            <% }) %>
+          ]
+        }
+        <% } %>
+      ]
+    }
+    </script>
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen" style="background-color: var(--color-bg); color: var(--color-text);">
     <%- include('partials/navbar') %>
 
-    <main class="flex-grow px-6 md:px-12 lg:px-24 pt-24 pb-12 transition-opacity duration-500 ease-in-out">
+    <main id="main-content" class="flex-grow px-6 md:px-12 lg:px-24 pt-24 pb-12 transition-opacity duration-500 ease-in-out">
       <%- body %>
     </main>
 

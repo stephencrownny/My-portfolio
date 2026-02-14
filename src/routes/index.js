@@ -22,7 +22,19 @@ router.get('/', async (req, res, next) => {
     const expertiseData = await fs.readFile(expertiseDataPath, 'utf-8');
     const { expertise } = JSON.parse(expertiseData);
 
-    res.render('index', { title: 'Portfolio', images, expertise });
+    res.render('index', {
+      title: 'Portfolio',
+      pageTitle: 'King Stephen | Fire Fighter & AI/ML Engineer',
+      metaDescription: 'Stephen Wanjiru is a Fire Fighter and AI/ML Engineer specializing in Hazmat Operations, Machine Learning, and Data Analysis. Bridging physical safety with digital intelligence.',
+      canonicalUrl: 'https://kingstephen.com/',
+      ogTitle: 'King Stephen | Fire Fighter & AI/ML Engineer',
+      ogImage: 'https://kingstephen.com/images/profile.jpg',
+      breadcrumbs: [
+        { name: 'Home', url: 'https://kingstephen.com/' }
+      ],
+      images,
+      expertise
+    });
   } catch (err) {
     logger.error('Error loading home page', { error: err.message, stack: err.stack });
     next(err);
